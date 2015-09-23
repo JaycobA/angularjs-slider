@@ -1324,4 +1324,3 @@ function throttle(func, wait, options) {
  * @property {bool} leading
  * @property {bool} trailing
  */
-/**
