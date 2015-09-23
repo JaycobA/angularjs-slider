@@ -1139,6 +1139,8 @@ function throttle(func, wait, options) {
      */
     positionTrackingBar: function(newMinValue, newMaxValue, newMinOffset, newMaxOffset)
     {
+      if(this.scope.rzSliderLimitTo < newMinValue)
+        return;
       this.scope.rzSliderModel = newMinValue;
       this.scope.rzSliderHigh = newMaxValue;
       this.updateHandles('rzSliderModel', newMinOffset);
@@ -1263,7 +1265,8 @@ function throttle(func, wait, options) {
       rzSliderPresentOnly: '@',
       rzSliderOnStart: '&',
       rzSliderOnChange: '&',
-      rzSliderOnEnd: '&'
+      rzSliderOnEnd: '&',
+      rzSliderLimitTo: '&'
     },
 
     /**
@@ -1280,6 +1283,9 @@ function throttle(func, wait, options) {
 
     link: function(scope, elem, attr)
     {
+      if(scope.rzSliderLimitTo === undefined) {
+        scope.rzSliderLimitTo = scope.rzSliderCeil;
+      }
       return new Slider(scope, elem, attr);
     }
   };
