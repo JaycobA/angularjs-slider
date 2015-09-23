@@ -1044,6 +1044,9 @@ function throttle(func, wait, options) {
         newValue = this.minValue;
         newOffset = 0;
       }
+      else if(this.scope.rzSliderLimitTo < this.offsetToValue(newOffset)) {
+        return;
+      }
       else if(newOffset >= this.maxLeft)
       {
         if(pointer.rzsl === this.maxLeft)
@@ -1139,8 +1142,6 @@ function throttle(func, wait, options) {
      */
     positionTrackingBar: function(newMinValue, newMaxValue, newMinOffset, newMaxOffset)
     {
-      if(this.scope.rzSliderLimitTo < newMinValue)
-        return;
       this.scope.rzSliderModel = newMinValue;
       this.scope.rzSliderHigh = newMaxValue;
       this.updateHandles('rzSliderModel', newMinOffset);
@@ -1266,7 +1267,7 @@ function throttle(func, wait, options) {
       rzSliderOnStart: '&',
       rzSliderOnChange: '&',
       rzSliderOnEnd: '&',
-      rzSliderLimitTo: '&'
+      rzSliderLimitTo: '@'
     },
 
     /**
@@ -1323,3 +1324,4 @@ function throttle(func, wait, options) {
  * @property {bool} leading
  * @property {bool} trailing
  */
+/**
